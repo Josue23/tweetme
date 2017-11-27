@@ -86,5 +86,5 @@ __pycache__/
 # local_settings.py
 
 .env
-tweetme
+# tweetme
 db.sqlite3
