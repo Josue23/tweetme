@@ -88,3 +88,5 @@ __pycache__/
 .env
 # tweetme
 db.sqlite3
+
+.vscode/
