@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
 # importa o model para fazer query a partir da views.py
@@ -18,14 +18,18 @@ from .models import Tweet
 # Retrieve
 # CBV
 class TweetDetailView(DetailView):
+    queryset = Tweet.objects.all()
     # chama automaticamente tweet_detail.html - app_detail
 
     # template_name = 'tweets/detail_view.html'
-    queryset = Tweet.objects.all()
 
-    def get_object(self):
-        print(self.kwargs)
-        return Tweet.objects.get(id=1)
+    # def get_object(self):
+    #     print(self.kwargs)
+    #     pk = self.kwargs.get("pk")
+    #     # pk = self.kwargs["pk"]
+    #     obj = get_object_or_404(Tweet, pk=pk)
+    #     # return Tweet.objects.get(id=pk) # substitui por return obj
+    #     return obj
 
 # CBV
 class TweetListView(ListView):
@@ -43,13 +47,14 @@ class TweetListView(ListView):
     
 
 # FBV
-# def tweet_detail_view(request, id=1):
-#     obj = Tweet.objects.get(id=id)  # GET from the database
-#     print("Objeto: {}".format(obj))
-#     context = {
-#         "object": obj,
-#     }
-#     return render(request, 'tweets/detail_view.html', context)
+def tweet_detail_view(request, pk=None): # pk == id
+    obj = Tweet.objects.get(pk=pk)  # GET from the database
+    obj = get_object_or_404(Tweet, pk=pk)
+    print("Objeto: {}".format(obj))
+    context = {
+        "object": obj,
+    }
+    return render(request, 'tweets/detail_view.html', context)
 
 # FBV
 # def tweet_list_view(request):
