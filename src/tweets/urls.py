@@ -13,6 +13,6 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls),
 
     # CBV - Class Based View
-    url(r'^$', TweetListView.as_view(), name='list'),
-    url(r'^1/$', TweetDetailView.as_view(), name='detail'),
+    url(r'^$', TweetListView.as_view(), name='list'), # /tweet/ - vem de /tweetme/urls.py
+    url(r'^(?P<pk>\d+)/$', TweetDetailView.as_view(), name='detail'), # /tweet/1/(?P<pk>\d+)]
 ]

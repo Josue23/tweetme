@@ -24,6 +24,7 @@ class TweetDetailView(DetailView):
     queryset = Tweet.objects.all()
 
     def get_object(self):
+        print(self.kwargs)
         return Tweet.objects.get(id=1)
 
 # CBV
