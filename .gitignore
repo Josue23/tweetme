@@ -90,3 +90,7 @@ __pycache__/
 db.sqlite3
 
 .vscode/
+virtualenv*
+unity-lens-photos*
+adium-theme-ubuntu*
+beautifulsoup4==4.4.1
