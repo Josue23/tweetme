@@ -29,6 +29,20 @@ class TweetCreateView(CreateView):
         return super(TweetCreateView, self).form_valid(form)
 
 
+def tweet_create_view(request):
+    form = TweetModelForm(request.POST or None)
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+
+    context = {
+        "form": form
+    }
+    return render(request, 'tweets/create_view.html', context)
+
+
 # Update
 
 

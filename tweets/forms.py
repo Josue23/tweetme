@@ -10,7 +10,7 @@ class TweetModelForm(forms.ModelForm):
 
         model = Tweet
         fields = [
-            "user",
+            # "user",
             "content"
         ]
         # exclude = ["user"]
