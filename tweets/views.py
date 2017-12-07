@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from django import forms
-from django.forms.utils import ErrorList
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView, CreateView
 from .forms import TweetModelForm
-from django.core.urlresolvers import reverse_lazy
-
+from .mixins import FormUserNeededMixin
 
 # importa o model para fazer query a partir da views.py
 from .models import Tweet
@@ -13,27 +12,16 @@ from .models import Tweet
 
 # Create
 
-class TweetCreateView(CreateView):
-    # model = Tweet
-    # form_class = TweetModelForm
-    # template_name = 'tweets/create_view.html'
-    # success_url = reverse_lazy("/tweet/create/")
+class TweetCreateView(FormUserNeededMixin, CreateView):
 
     # queryset = Tweet.objects.all()
     form_class = TweetModelForm
     template_name = 'tweets/create_view.html' # "POST /tweet/create/ HTTP/1.1" 302 0
     # fields = ['user', 'content']
-    # success_url = "/tweet/create/" # "GET /tweet/create/ HTTP/1.1" 200 351
-    success_url = "/" # redireciona para a url home # "GET / HTTP/1.1" 200 1431
-
-    # import ipdb; ipdb.set_trace()
-    def form_valid(self, form):
-        if self.request.user.is_authenticated():
-            form.instance.user = self.request.user
-            return super(TweetCreateView, self).form_valid(form)
-        else:
-            form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList(["User must be logged in to continue"])
-            return self.form_invalid(form) # form_invalid comes from the class CreateView
+    success_url = "/tweet/create/" # "GET /tweet/create/ HTTP/1.1" 200 351
+    # success_url = "/" # redireciona para a url home # "GET / HTTP/1.1" 200 1431
+    # login_url = '/admin/'
+    # redirect_field_name = 'redirect_to'
 
 
 # def tweet_create_view(request):
