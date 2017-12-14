@@ -89,6 +89,8 @@ __pycache__/
 .tweetme
 db.sqlite3
 
+.idea/
+
 .vscode/
 virtualenv*
 unity-lens-photos*

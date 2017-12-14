@@ -12,7 +12,7 @@ from .validators import validate_content
 class Tweet(models.Model):
 	# cada tweet é associado a um user
 	user      = models.ForeignKey(settings.AUTH_USER_MODEL)
-	content   = models.CharField(max_length=140, validators=[validate_content])
+	content   = models.CharField(max_length=140, validators=[validate_content]) # different validations
 	updated   = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
 

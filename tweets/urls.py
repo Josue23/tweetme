@@ -8,7 +8,8 @@ from .views import (
     # TweetListView, 
     TweetCreateView,
     TweetDetailView,
-    TweetListView
+    TweetListView,
+    TweetUpdateView
     # tweet_detail_view, 
     ) # tweet_list_view,
 
@@ -22,4 +23,5 @@ urlpatterns = [
     url(r'^$', TweetListView.as_view(), name='list'), # /tweet/ - vem de /tweetme/urls.py
     url(r'^create/$', TweetCreateView.as_view(), name='create'), # /tweet/create/ - vem de /tweetme/urls.py
     url(r'^(?P<pk>\d+)/$', TweetDetailView.as_view(), name='detail'), # /tweet/1/(?P<pk>\d+)]
+    url(r'^(?P<pk>\d+)/update/$', TweetUpdateView.as_view(), name='update'), # /tweet/1/(?P<pk>\d+)]
 ]

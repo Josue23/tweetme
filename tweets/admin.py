@@ -8,7 +8,7 @@ from .models import Tweet
 
 # admin.site.register(Tweet)
 
-
+# replace the admin form with the TweetModelAdmin
 class TweetModelAdmin(admin.ModelAdmin):
     form = TweetModelForm
     # class Meta:
