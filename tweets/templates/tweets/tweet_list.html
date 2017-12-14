@@ -1,13 +1,15 @@
 {% for obj in object_list %}
-<p>
-    {{ obj.content }}
+    PK: {{ obj.pk }}
     <br />
-    {{ obj.user }}
+    Content: {{ obj.content }}
     <br />
-    {{ obj.timestamp }}
+    User: {{ obj.user }}
     <br />
-    {{ obj.timestamp|timesince }}
-</p>
+    Timestamp: {{ obj.timestamp }}
+    <br />
+    Timesince: {{ obj.timestamp|timesince }}
+    <br />
+    <br />
 {% empty %}
-    <p>No tweets yet.</p>
+    <p>No tweets yet.
 {% endfor %}

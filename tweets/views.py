@@ -2,7 +2,7 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -25,7 +25,8 @@ class TweetCreateView(FormUserNeededMixin, CreateView):
     form_class = TweetModelForm
     template_name = 'tweets/create_view.html' # "POST /tweet/create/ HTTP/1.1" 302 0
     # fields = ['user', 'content']
-    success_url = "/tweet/create/" # "GET /tweet/create/ HTTP/1.1" 200 351
+    # success_url = "/tweet/create/" # "GET /tweet/create/ HTTP/1.1" 200 351
+    # success_url = reverse_lazy("tweet:detail")
     # success_url = "/" # redireciona para a url home # "GET / HTTP/1.1" 200 1431
     # login_url = '/admin/'
     # redirect_field_name = 'redirect_to'
@@ -52,15 +53,19 @@ class TweetUpdateView(LoginRequiredMixin, UserOwnerMixin, UpdateView):
     queryset = Tweet.objects.all()
     form_class = TweetModelForm
     template_name = 'tweets/update_view.html'
-    success_url = "/tweet/"
+    # success_url = "/tweet/"
 
 
 # Delete
 
 class TweetDeleteView(LoginRequiredMixin, DeleteView):
     model = Tweet
-    success_url = reverse_lazy("home")
     template_name = "tweets/delete_confirm.html"
+
+    # namespace: tweet - feito no tweetme/urls.py
+    # nome da url: list
+    # reverse() traduz para /tweet/list/
+    success_url = reverse_lazy("tweet:list") # reverse() # /tweet/
 
 
 
@@ -69,7 +74,6 @@ class TweetDeleteView(LoginRequiredMixin, DeleteView):
 class TweetDetailView(DetailView):
     queryset = Tweet.objects.all()
     # chama automaticamente tweet_detail.html - app_detail
-
     # template_name = 'tweets/detail_view.html'
 
     # def get_object(self):
@@ -82,10 +86,9 @@ class TweetDetailView(DetailView):
 
 # CBV
 class TweetListView(ListView):
-    # chama automaticamente tweet_list.html -app_list
-
-    # template_name = 'tweets/list_view.html'
     queryset = Tweet.objects.all()
+    # chama automaticamente tweet_list.html -app_list
+    # template_name = 'tweets/list_view.html'
 
     
     def get_context_data(self, *args, **kwargs):

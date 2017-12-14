@@ -10,6 +10,7 @@ class TweetModelForm(forms.ModelForm):
 
         model = Tweet
         fields = [
+            "id",
             # "user",
             "content"
         ]
