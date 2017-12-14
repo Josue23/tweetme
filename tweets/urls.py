@@ -7,9 +7,10 @@ from django.conf.urls import url
 from .views import (
     # TweetListView, 
     TweetCreateView,
+    TweetDeleteView,
     TweetDetailView,
     TweetListView,
-    TweetUpdateView
+    TweetUpdateView,
     # tweet_detail_view, 
     ) # tweet_list_view,
 
@@ -23,5 +24,6 @@ urlpatterns = [
     url(r'^$', TweetListView.as_view(), name='list'), # /tweet/ - vem de /tweetme/urls.py
     url(r'^create/$', TweetCreateView.as_view(), name='create'), # /tweet/create/ - vem de /tweetme/urls.py
     url(r'^(?P<pk>\d+)/$', TweetDetailView.as_view(), name='detail'), # /tweet/1/(?P<pk>\d+)]
-    url(r'^(?P<pk>\d+)/update/$', TweetUpdateView.as_view(), name='update'), # /tweet/1/(?P<pk>\d+)]
+    url(r'^(?P<pk>\d+)/update/$', TweetUpdateView.as_view(), name='update'), # /tweet/1/update/(?P<pk>\d+)]
+    url(r'^(?P<pk>\d+)/delete/$', TweetDeleteView.as_view(), name='delete'), # /tweet/1/delete/(?P<pk>\d+)]
 ]

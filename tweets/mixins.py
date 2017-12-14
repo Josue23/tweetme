@@ -3,7 +3,6 @@ from django import forms
 from django.forms.utils import ErrorList
 
 class FormUserNeededMixin(object):
-    
     def form_valid(self, form):
         if self.request.user.is_authenticated():
             form.instance.user = self.request.user
@@ -11,3 +10,14 @@ class FormUserNeededMixin(object):
         else:
             form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList(["User must be logged in to continue"])
             return self.form_invalid(form) # form_invalid comes from the class CreateView
+
+
+class UserOwnerMixin(FormUserNeededMixin, object):
+    def form_valid(self, form):
+        if form.instance.user == self.request.user:
+            return super(FormUserNeededMixin, self).form_valid(form)
+        else:
+            form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList(["This user is not allowed to cahnge this data."])
+            return self.form_invalid(form) # form_invalid comes from the class CreateView
+
+        
