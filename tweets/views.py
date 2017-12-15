@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (
@@ -86,9 +87,23 @@ class TweetDetailView(DetailView):
 
 # CBV
 class TweetListView(ListView):
-    queryset = Tweet.objects.all()
+    # queryset = Tweet.objects.all()
     # chama automaticamente tweet_list.html -app_list
     # template_name = 'tweets/list_view.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = Tweet.objects.all()
+        # queryset = super(CLASS_NAME, self).get_queryset()
+        # queryset = queryset # TODO
+        print(self.request.GET)
+        query = self.request.GET.get("q", None)
+        print("query: {}".format(query))
+        if query is not None:
+            qs = qs.filter(
+                Q(content__icontains=query) |
+                Q(user__username__icontains=query)
+                )
+        return qs
 
     
     def get_context_data(self, *args, **kwargs):

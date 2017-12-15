@@ -1,3 +1,5 @@
+{% include 'tweets/search_form.html' %}
+<br />
 {% for obj in object_list %}
     PK: {{ obj.pk }}
     <br />
@@ -7,9 +9,13 @@
     <br />
     Timestamp: {{ obj.timestamp }}
     <br />
-    Timesince: {{ obj.timestamp|timesince }}
+    Timesince: {{ obj.timestamp|timesince }} ago
     <br />
     <br />
 {% empty %}
-    <p>No tweets yet.
+    {% if request.GET.q %}
+    <p>No tweets found.</p>
+    {% else %}
+    <p>No tweets yet.</p>
+    {% endif %}
 {% endfor %}
