@@ -1,10 +1,14 @@
-{% for obj in object_list %}
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for obj in object_list %}
     <p>{{ obj.coontent }}
-    <br />
-    {{ obj.user }}
-    <br />
-    {{ obj.timestamp }}
-    <br />
-    {{ obj.timestamp|timesince }}
+        <br />
+        {{ obj.user }}
+        <br />
+        {{ obj.timestamp }}
+        <br />
+        {{ obj.timestamp|timesince }}
     </p>
-{% endfor %}
+    {% endfor %}
+{% endblock content %}
