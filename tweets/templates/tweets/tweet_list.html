@@ -1,37 +1,40 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
+
 <div class="row">
     <div class="col-sm-3 col-xs-12" style="background-color: red;">
-        <h1> {{ object.user }} </h1>
+        <h1> {{ request.user }} </h1>
     </div>
     <div class="col-sm-9">
         {% for obj in object_list %}
-            <div class="media">
-                <div class="media-left">
-                    <a href="">
-                        {% if obj.image %}
-                            <img class="media-object" src="..." alt="...">
-                        {% endif %}
-                    </a>
-                </div>
-                <div class="media-body">
-                    {{ obj.content }}
-                    <br />
-                    <br /> via {{ obj.user }} | {{ obj.timestamp|timesince }} ago |
-                    <!-- get_absolute_url está setado em models.py -->
-                    <a href="{{ obj.get_absolute_url }}">View</a>
-                </div>
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    {% if obj.image %}
+                        <img class="media-object" src="..." alt="...">
+                    {% endif %}
+                </a>
+            </div>
+            <div class="media-body">
+                PK: {{ obj.pk }}
+                <br />
+                {{ obj.content }}
+                <br />
+                via {{ obj.user }} | {{ obj.timestamp|timesince }} ago |
+                <!-- get_absolute_url está setado em models.py -->
+                <a href="{{ obj.get_absolute_url }}">View</a>
             </div>
             <hr />
-            {% empty %}
+        </div>
+        {% empty %}
             {% if request.GET.q %}
             <p>No tweets found.</p>
             {% else %}
             <p>No tweets yet.</p>
             {% endif %}
-            {% endfor %}
+        {% endfor %}
     </div>
 </div>
+
 {% endblock content %}
