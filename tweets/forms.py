@@ -4,6 +4,7 @@ from .models import Tweet
 
 class TweetModelForm(forms.ModelForm):
     # new_title = forms.CharField(label='',)
+    
     # textarea do template tweet_list.html
     # content sobreescreve oque está na class Meta abaixo
     content = forms.CharField(
