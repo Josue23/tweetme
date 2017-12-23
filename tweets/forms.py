@@ -3,7 +3,16 @@ from django import forms
 from .models import Tweet
 
 class TweetModelForm(forms.ModelForm):
-    """Form definition for TweetModelForm."""
+    # new_title = forms.CharField(label='',)
+    # textarea do template tweet_list.html
+    # content sobreescreve oque está na class Meta abaixo
+    content = forms.CharField(
+        required=False, label='',
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Your message', 
+            'class': 'form-control',
+            # 'autofocus': 'autofocus'
+        }))
 
     class Meta:
         """Meta definition for TweetModelForm."""

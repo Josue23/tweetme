@@ -95,9 +95,9 @@ class TweetListView(ListView):
         qs = Tweet.objects.all()
         # queryset = super(CLASS_NAME, self).get_queryset()
         # queryset = queryset # TODO
-        print(self.request.GET)
+        # print(self.request.GET)
         query = self.request.GET.get("q", None)
-        print("query: {}".format(query))
+        # print("query: {}".format(query))
         if query is not None:
             qs = qs.filter(
                 Q(content__icontains=query) |
@@ -108,6 +108,8 @@ class TweetListView(ListView):
     
     def get_context_data(self, *args, **kwargs):
         context = super(TweetListView, self).get_context_data(*args, **kwargs)
+        context['create_form'] = TweetModelForm() # /tweets/tweet_list.html
+        context['create_url'] = reverse_lazy('tweet:create') # /tweets/tweet_list.html
         # context["another_list"] = Tweet.objects.all()
         # print(context)
         return context
