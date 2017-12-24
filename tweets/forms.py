@@ -8,7 +8,8 @@ class TweetModelForm(forms.ModelForm):
     # textarea do template tweet_list.html
     # content sobreescreve oque está na class Meta abaixo
     content = forms.CharField(
-        required=False, label='',
+        # required=False, 
+        label='',
         widget=forms.Textarea(attrs={
             'placeholder': 'Your message', 
             'class': 'form-control',
