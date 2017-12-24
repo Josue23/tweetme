@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # thidy parts
+    'rest_framework', # django-rest-framework
     'django_extensions',
     'crispy_forms',
 

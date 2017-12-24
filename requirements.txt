@@ -3,8 +3,11 @@ decorator==4.0.6
 Django==1.10.3
 django-crispy-forms==1.7.0
 django-extensions==1.9.8
+django-filter==1.1.0
+djangorestframework==3.7.7
 html5lib==0.999
 ipython==2.4.1
+Markdown==2.6.10
 pexpect==4.0.1
 ptyprocess==0.5
 simplegeneric==0.8.1
