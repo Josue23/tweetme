@@ -6,15 +6,15 @@
 from django.conf.urls import url
 from django.views.generic.base import RedirectView
 
-from .views import (
-    # # TweetListView, 
-    # TweetCreateView,
-    # TweetDeleteView,
-    # TweetDetailView,
-    # TweetListView,
-    # TweetUpdateView,
-    # # tweet_detail_view, 
-    ) # tweet_list_view,
+# from .views import (
+# #     TweetListView
+# #     # TweetCreateView,
+# #     # TweetDeleteView,
+# #     # TweetDetailView,
+# #     # TweetListView,
+# #     # TweetUpdateView,
+# #     # # tweet_detail_view, 
+#     )
 
 urlpatterns = [
     # FBV - Function Based View
