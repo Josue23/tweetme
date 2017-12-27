@@ -1,5 +1,44 @@
 {% extends 'base.html' %}
 
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            console.log('Working!');            
+            
+            $.ajax({
+                // url: "{% url 'tweet-api:list' %}", // formato de template do django
+                url: "/api/tweet/",
+                method: "GET",
+                success: function(data){
+                    // console.log("sucesso!");
+                    // console.log(data);
+                    $.each(data, function(key, value){
+                        var tweetKey = key;
+                        var tweetContent = value.content;
+                        var tweetUser = value.user;
+                        $('#tweet-container').append(
+                            "<div class=\"media\">\
+                                <div class=\"media-body\">" 
+                                + tweetContent
+                                + "<br />via " + tweetUser.username + " | "
+                                + "<a href='#'>View</a>"
+                                + "</div>\
+                            </div>\
+                            <br /><hr />"
+                        )
+                    })
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+
+        });
+    </script>    
+{% endblock script %}
+    
+
 {% block content %}
 
 <div class="row">
@@ -15,6 +54,10 @@
             </div>
             <hr />
         {% endif %}
+
+        <div id="tweet-container">
+        
+        </div>
 
         {% for obj in object_list %}
         <div class="media">
