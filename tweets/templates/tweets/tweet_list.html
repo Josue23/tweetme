@@ -22,28 +22,36 @@
             var query = getParameterByName('q');
             var tweetList = [];
 
-            function parseTweets() {
-                if (tweetList == 0) {
-                    $('#tweet-container').text("No tweets currently found.")
+            // função para gravar o tweet no array tweetList
+            function attachTweet(tweetValue, prepend){
+                // date_display vem de serializers.py
+                var dateDisplay = tweetValue.date_display;
+                var tweetContent = tweetValue.content;
+                var tweetUser = tweetValue.user;
+                var tweetFormattedHtml = "<div class=\"media\">\
+                            <div class=\"media-body\">"
+                    + tweetContent
+                    + "<br />via " + tweetUser.username + " | "
+                    + dateDisplay + " | "
+                    + "<a href='#'>View</a>"
+                    + "</div>\
+                            </div>\
+                            <br /><hr />"
+                if (prepend==true){
+                    $('#tweet-container').prepend(tweetFormattedHtml)
                 } else {
-                    // tweets exist, parse & display them
-                    $.each(tweetList, function (key, value) {
-                        var tweetKey = key;
-                        // date_display vem de serializers.py
-                        var dateDisplay = value.date_display;
-                        var tweetContent = value.content;
-                        var tweetUser = value.user;
-                        $('#tweet-container').append(
-                            "<div class=\"media\">\
-                                    <div class=\"media-body\">"
-                            + tweetContent
-                            + "<br />via " + tweetUser.username + " | "
-                            + dateDisplay + " | "
-                            + "<a href='#'>View</a>"
-                            + "</div>\
-                                </div>\
-                                <br /><hr />"
-                        )
+                    $('#tweet-container').append(tweetFormattedHtml)
+                        }
+                    }
+                    
+                    function parseTweets() {
+                        if (tweetList == 0) {
+                            $('#tweet-container').text("No tweets currently found.")
+                        } else {
+                            // tweets exist, parse & display them
+                            $.each(tweetList, function (key, value) {
+                                var tweetKey = key;
+                                attachTweet(value)
                     })
                 }
             }
@@ -88,8 +96,14 @@
                     data: formData,
                     method: "POST",
                     success: function (data) {
+                        // limpa a textarea de input de texto do tweet
+                        this_.find("input[type=text], textarea").val("") // faz a mesma coisa da linha abaixo
+                        // $(this_).find("input[type=text], textarea").val("") // faz a mesma coisa da linha acima
+
+                        // will attach that tweet value for whatever sent back from database
+                        attachTweet(data, true)
                         // console.log(data)
-                        fetchTweets()
+                        // fetchTweets()
                         // tweetList = data
                         // parseTweets();
                     },
