@@ -29,6 +29,8 @@
                     // tweets exist, parse & display them
                     $.each(tweetList, function (key, value) {
                         var tweetKey = key;
+                        // date_display vem de serializers.py
+                        var dateDisplay = value.date_display;
                         var tweetContent = value.content;
                         var tweetUser = value.user;
                         $('#tweet-container').append(
@@ -36,6 +38,7 @@
                                     <div class=\"media-body\">"
                             + tweetContent
                             + "<br />via " + tweetUser.username + " | "
+                            + dateDisplay + " | "
                             + "<a href='#'>View</a>"
                             + "</div>\
                                 </div>\

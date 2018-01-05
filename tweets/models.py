@@ -25,6 +25,11 @@ class Tweet(models.Model):
 	def get_absolute_url(self):
 		return reverse('tweet:detail', kwargs={'pk': self.pk})
 
+	# mais uma forma de ordenar os tweets
+	# ordena os tweets pela ordem de criação dos mesmos
+	# class Meta():
+	# 	ordering = ['-timestamp', 'content']
+
 	# # # validation
 	# def clean(self, *args, **kwargs):
 	# 	content = self.content
