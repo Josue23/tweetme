@@ -85,15 +85,16 @@
                     data: formData,
                     method: "POST",
                     success: function (data) {
-                        console.log(data)
+                        // console.log(data)
                         fetchTweets()
                         // tweetList = data
                         // parseTweets();
                     },
-                    error: function (data) {
+                    error: function (data, url) {
                         console.log("error");
                         console.log(data.statusText);
                         console.log(data.status)
+                        // console.log(url)
                     }
                 })
 
